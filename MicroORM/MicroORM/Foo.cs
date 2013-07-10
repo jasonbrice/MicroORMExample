@@ -14,5 +14,5 @@ namespace MicroORMTest{
         //[Column("name")]
         public string name { get; set; }
     }
-
+    
 }

@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.13\lib\net40\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="MicroLite">
       <HintPath>..\packages\MicroLite.3.1.1\lib\net40-client\MicroLite.dll</HintPath>
     </Reference>
@@ -43,6 +46,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.66.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,7 +57,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DapperForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DapperForm.Designer.cs">
+      <DependentUpon>DapperForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Foo.cs" />
+    <Compile Include="FooQuery.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FooQuery.Designer.cs">
+      <DependentUpon>FooQuery.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +96,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DapperForm.resx">
+      <DependentUpon>DapperForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FooQuery.resx">
+      <DependentUpon>FooQuery.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

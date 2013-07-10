@@ -39,5 +39,22 @@ namespace MicroORMTest
             proc.Start();
             
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.ProcessStartInfo procStartInfo =
+                new System.Diagnostics.ProcessStartInfo("cmd", "/c sqlite3 Db.sqlite \"VACUUM\"");
+
+            procStartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            System.Diagnostics.Process proc = new System.Diagnostics.Process();
+            proc.StartInfo = procStartInfo;
+            proc.Start();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            DapperForm form = new DapperForm();
+            form.Show();
+        }
     }
 }
