@@ -3,17 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MicroORM.PetaPoco
-{
-   public class foo
-    {
-       public int id{get;set;}
-       public string name { get; set; }
-    }
-
-}
-namespace MicroORM.MicroLite
-{
+namespace MicroORMTest{
     //[Table("foo")]
     public class foo
     {
