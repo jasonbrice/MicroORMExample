@@ -154,15 +154,18 @@ namespace MicroORMTest
 
             // Create a PetaPoco database object
             var db = new PetaPoco.Database("sqlite");
-
-            for (int i = 0; i < count; i++)
+            using (var transaction = db.GetTransaction())
             {
-                foo foo = new foo();
-                foo.name = "PetaPoco Insert Test " + i;
-                db.Insert("foo", "Id", foo);
+                for (int i = 0; i < count; i++)
+                {
+                    foo foo = new foo();
+                    foo.name = "PetaPoco Insert Test " + i;
+                    db.Insert("foo", "Id", foo);
 
-                if (i % 500 == 0) worker.ReportProgress(i);//this.fooQuery1.AppendDisplay(".");
+                    if (i % 500 == 0) worker.ReportProgress(i);//this.fooQuery1.AppendDisplay(".");
 
+                }
+                transaction.Complete();
             }
         }
 
