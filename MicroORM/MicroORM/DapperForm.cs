@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
-
+using System.Transactions;  
 using System.Data.SQLite;
 using Dapper;
 
@@ -139,23 +139,30 @@ namespace MicroORMTest
         {
             BackgroundWorker worker = sender as BackgroundWorker;
 
-   using (SQLiteConnection conn = GetSqlConnection())
+            using (var transactionScope = new TransactionScope())
             {
-                conn.Open();
+                using (SQLiteConnection conn = GetSqlConnection())
+                {
+                    conn.Open();
 
-                string sqlQuery = "INSERT INTO foo(name) VALUES (@name)";
+                    string sqlQuery = "INSERT INTO foo(name) VALUES (@name)";
 
-                for (int i = 0; i < count; i++) { 
+                    for (int i = 0; i < count; i++)
+                    {
 
-                    string s = "Created by Dapper " + i;
-                    if (i % 500 == 0) worker.ReportProgress(i);
-                    conn.Execute(sqlQuery,
-                        new
-                        {
-                            name=s
-                        });
-            }
-                conn.Close();
+                        string s = "Created by Dapper " + i;
+                        if (i % 500 == 0) worker.ReportProgress(i);
+                        conn.Execute(sqlQuery,
+                            new
+                            {
+                                name = s
+                            });
+                    }
+                    conn.Close();
+
+                    transactionScope.Complete();
+                }
+                
             }
         }
 
